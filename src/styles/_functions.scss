@@ -1,0 +1,11 @@
+@use "variables" as v;
+
+@function getFontProp($prop, $val) {
+   $property: map-get(v.$font, $prop);
+   @return map-get($property, $val);
+}
+
+@function getColor($type, $val) {
+   $type: map-get(v.$color, $type);
+   @return map-get($type, $val);
+}
