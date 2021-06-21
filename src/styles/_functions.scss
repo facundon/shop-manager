@@ -5,7 +5,12 @@
    @return map-get($property, $val);
 }
 
-@function getColor($type, $val) {
+@function getColor($type, $val, $opacity: 1) {
    $type: map-get(v.$color, $type);
-   @return map-get($type, $val);
+   @if ($type) {
+      $result: map-get($type, $val);
+      @return rgba($result, $opacity);
+   } @else {
+      @error "ERROR: Specified index does not exist in the mapping";
+   }
 }
