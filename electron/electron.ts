@@ -1,9 +1,12 @@
-const { app, BrowserWindow, ipcMain } = require("electron")
-const path = require("path")
+import { app, BrowserWindow, ipcMain } from "electron"
+import path = require("path")
+
+import "./db"
+import "reflect-metadata"
 
 const isDev = true
 
-let mainWindow
+let mainWindow: BrowserWindow
 function createMainWindow() {
    mainWindow = new BrowserWindow({
       width: 1100,
@@ -34,8 +37,7 @@ const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
    app.quit()
 } else {
-   app.on("second-instance", (event, commandLine, workingDirectory) => {
-      // Someone tried to run a second instance, we should focus our window.
+   app.on("second-instance", () => {
       if (mainWindow) {
          if (mainWindow.isMinimized()) mainWindow.restore()
          mainWindow.focus()

@@ -1,0 +1,16 @@
+{
+   "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "paths": { "*": ["node_modules/*"] },
+      "allowSyntheticDefaultImports": true,
+      "skipLibCheck": true,
+      "baseUrl": ".",
+      "outDir": "../build",
+      "strict": true,
+      "allowJs": true,
+      "noImplicitAny": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+   }
+}
