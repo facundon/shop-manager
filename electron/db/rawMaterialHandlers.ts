@@ -1,10 +1,16 @@
+import {
+   DeleteRawMaterialProps,
+   InsertRawMaterialProps,
+   UpdateRawMaterialProps,
+} from "../@types/api"
 import { ipcMain } from "electron"
 import { RawMaterial } from "./entity/RawMaterial"
 
 export default function setRawMaterialHandlers() {
    ipcMain.handle(
       "insert-raw-material",
-      async (_, name: string, price: number) => {
+      async (_, props: InsertRawMaterialProps) => {
+         const { name, price } = props
          try {
             const exists = await RawMaterial.findOne({ name })
             if (exists) return Error("Raw material already exists")
@@ -20,23 +26,24 @@ export default function setRawMaterialHandlers() {
          }
       }
    )
-   ipcMain.handle("delete-raw-material", async (_, id: number) => {
-      try {
-         const rawMaterial = await RawMaterial.findOneOrFail(id)
-         await rawMaterial.remove()
-         return null
-      } catch (error) {
-         console.error(error)
-         return error
+   ipcMain.handle(
+      "delete-raw-material",
+      async (_, props: DeleteRawMaterialProps) => {
+         const { id } = props
+         try {
+            const rawMaterial = await RawMaterial.findOneOrFail(id)
+            await rawMaterial.remove()
+            return null
+         } catch (error) {
+            console.error(error)
+            return error
+         }
       }
-   })
+   )
    ipcMain.handle(
       "update-raw-material",
-      async (
-         _,
-         id: number,
-         { name, price }: { name?: string; price?: number }
-      ) => {
+      async (_, props: UpdateRawMaterialProps) => {
+         const { id, name, price } = props
          try {
             const rawMaterial = await RawMaterial.findOneOrFail(id)
             if (name) rawMaterial.name = name

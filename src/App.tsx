@@ -1,3 +1,5 @@
+import { Gender } from "../electron/db/entity/Customer"
+
 function App() {
    return (
       <div className="App">
@@ -6,11 +8,11 @@ function App() {
          </p>
          <button
             onClick={() => {
-               const response = window.electron.customer.insert(
-                  "asd",
-                  5,
-                  "male"
-               )
+               const response = window.electron.customer.insert({
+                  name: "asd",
+                  age: 5,
+                  gender: Gender.Male,
+               })
                console.log(response)
             }}
          >
