@@ -1,5 +1,4 @@
-import { OrderStatus } from "../db/entity/Order"
-import { Gender } from "../db/entity/Customer"
+import { Gender, OrderStatus } from "./entities"
 
 export type InsertCustomerProps = {
    name: string

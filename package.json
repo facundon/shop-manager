@@ -17,7 +17,9 @@
    },
    "private": true,
    "dependencies": {
+      "@craco/craco": "^6.1.2",
       "better-sqlite3": "^7.4.1",
+      "craco-babel-loader": "^0.1.4",
       "react": "^17.0.2",
       "react-dom": "^17.0.2",
       "react-scripts": "^4.0.3",
@@ -41,12 +43,12 @@
       "typescript": "^4.1.2"
    },
    "scripts": {
-      "start:web": "react-scripts start",
+      "start:web": "craco start",
       "start:desktop": "npm run build:desktop && electron ./build/electron.js",
-      "build:web": "react-scripts build",
+      "build:web": "craco build",
       "build:desktop": "tsc -p electron/tsconfig.json",
-      "test": "react-scripts test",
-      "eject": "react-scripts eject",
+      "test": "craco test",
+      "eject": "craco eject",
       "dist": "electron-builder",
       "rebuild": "node_modules/.bin/electron-rebuild -f -w better-sqlite3",
       "prerelease": "npm run build:web",

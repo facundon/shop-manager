@@ -1,4 +1,4 @@
-import { Gender } from "../electron/db/entity/Customer"
+import { Gender } from "../electron/@types/entities"
 
 function App() {
    return (

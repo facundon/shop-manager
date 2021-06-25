@@ -1,3 +1,4 @@
+import { Gender, OrderStatus } from "../../@types/entities"
 import {
    BaseEntity,
    Column,
@@ -5,12 +6,7 @@ import {
    OneToMany,
    PrimaryGeneratedColumn,
 } from "typeorm"
-import { Order, OrderStatus } from "./Order"
-
-export enum Gender {
-   Male = "male",
-   Female = "female",
-}
+import { Order } from "./Order"
 
 @Entity("customers")
 export class Customer extends BaseEntity {

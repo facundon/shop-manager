@@ -1,3 +1,4 @@
+import { OrderStatus } from "../../@types/entities"
 import {
    AfterInsert,
    BaseEntity,
@@ -10,14 +11,6 @@ import {
 } from "typeorm"
 import { Customer } from "./Customer"
 import { Product } from "./Product"
-
-export enum OrderStatus {
-   Pending = "pending",
-   Progress = "in_progress",
-   Finished = "finished",
-   Delivered = "delivered",
-   Canceled = "canceled",
-}
 
 @Entity("orders")
 export class Order extends BaseEntity {
