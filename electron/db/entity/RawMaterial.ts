@@ -2,9 +2,11 @@ import {
    BaseEntity,
    Column,
    Entity,
+   ManyToMany,
    OneToMany,
    PrimaryGeneratedColumn,
 } from "typeorm"
+import { Product } from "./Product"
 import { Raise } from "./Raise"
 
 @Entity("raw_materials")
@@ -20,4 +22,7 @@ export class RawMaterial extends BaseEntity {
 
    @OneToMany(() => Raise, raise => raise.item)
    raises!: Raise[]
+
+   @ManyToMany(() => Product, product => product.rawMaterials)
+   products!: Product[]
 }

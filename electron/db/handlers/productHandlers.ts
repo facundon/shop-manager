@@ -1,11 +1,13 @@
+import { ipcMain } from "electron"
+import { Product } from "../entity/Product"
+import { RawMaterial } from "../entity/RawMaterial"
+
 import {
    DeleteProductProps,
    InsertProductProps,
    UpdateProductProps,
-} from "../@types/api"
-import { ipcMain } from "electron"
-import { Product } from "./entity/Product"
-import { RawMaterial } from "./entity/RawMaterial"
+} from "../../@types/api"
+import { getProductPrice, registerRaise } from "../utils"
 
 export default function setProductHandlers() {
    ipcMain.handle("insert-product", async (_, props: InsertProductProps) => {
@@ -20,6 +22,8 @@ export default function setProductHandlers() {
          product.profit = profit
          const rawMaterials = await RawMaterial.findByIds(rawMaterialsIds)
          product.rawMaterials = rawMaterials
+         product.price = getProductPrice(rawMaterials, profit)
+
          await product.save()
          return product.id
       } catch (error) {
@@ -41,13 +45,27 @@ export default function setProductHandlers() {
    ipcMain.handle("update-product", async (_, props: UpdateProductProps) => {
       const { id, name, variant, profit, rawMaterialsIds } = props
       try {
-         const product = await Product.findOneOrFail(id)
+         const product = await Product.findOneOrFail(id, {
+            relations: ["rawMaterials"],
+         })
          if (name) product.name = name
          if (variant) product.variant = variant
          if (profit) product.profit = profit
          if (rawMaterialsIds) {
-            const newMaterials = await RawMaterial.findByIds(rawMaterialsIds)
+            const newMaterials = await RawMaterial.findByIds(rawMaterialsIds, {
+               relations: ["products"],
+            })
             product.rawMaterials = newMaterials
+         }
+         if (profit || rawMaterialsIds) {
+            const newPrice = getProductPrice(
+               product.rawMaterials,
+               product.profit
+            )
+            if (newPrice !== product.price) {
+               await registerRaise(product, newPrice)
+               product.price = newPrice
+            }
          }
          await product.save()
          return null

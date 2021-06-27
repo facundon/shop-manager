@@ -1,10 +1,12 @@
+import { ipcMain } from "electron"
+import { RawMaterial } from "../entity/RawMaterial"
+import { registerRaise } from "../utils"
+
 import {
    DeleteRawMaterialProps,
    InsertRawMaterialProps,
    UpdateRawMaterialProps,
-} from "../@types/api"
-import { ipcMain } from "electron"
-import { RawMaterial } from "./entity/RawMaterial"
+} from "../../@types/api"
 
 export default function setRawMaterialHandlers() {
    ipcMain.handle(
@@ -47,7 +49,10 @@ export default function setRawMaterialHandlers() {
          try {
             const rawMaterial = await RawMaterial.findOneOrFail(id)
             if (name) rawMaterial.name = name
-            if (price) rawMaterial.price = price
+            if (price && price !== rawMaterial.price) {
+               await registerRaise(rawMaterial, price)
+               rawMaterial.price = price
+            }
             await rawMaterial.save()
             return null
          } catch (error) {

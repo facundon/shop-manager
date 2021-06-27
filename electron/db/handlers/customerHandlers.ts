@@ -2,9 +2,9 @@ import {
    DeleteCustomerProps,
    InsertCustomerProps,
    UpdateCustomerProps,
-} from "../@types/api"
+} from "../../@types/api"
 import { ipcMain } from "electron"
-import { Customer } from "./entity/Customer"
+import { Customer } from "../entity/Customer"
 
 export default function setCustomerHandlers() {
    ipcMain.handle("insert-customer", async (_, props: InsertCustomerProps) => {

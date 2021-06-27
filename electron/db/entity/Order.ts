@@ -1,6 +1,5 @@
 import { OrderStatus } from "../../@types/entities"
 import {
-   AfterInsert,
    BaseEntity,
    Column,
    Entity,
@@ -32,13 +31,4 @@ export class Order extends BaseEntity {
 
    @Column()
    price!: number
-
-   @AfterInsert()
-   getPrice() {
-      let total = 0
-      this.products.forEach(product => {
-         total += product.getPrice()
-      })
-      this.price = total - (total * this.discount) / 100
-   }
 }

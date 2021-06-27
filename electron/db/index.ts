@@ -1,8 +1,8 @@
 import { createConnection } from "typeorm"
-import setOrderHandlers from "./orderHandlers"
-import setCustomerHandlers from "./customerHandlers"
-import setProductHandlers from "./productHandlers"
-import setRawMaterialHandlers from "./rawMaterialHandlers"
+import setOrderHandlers from "./handlers/orderHandlers"
+import setCustomerHandlers from "./handlers/customerHandlers"
+import setProductHandlers from "./handlers/productHandlers"
+import setRawMaterialHandlers from "./handlers/rawMaterialHandlers"
 
 createConnection().then(connection => {
    connection.synchronize()

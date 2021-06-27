@@ -21,7 +21,7 @@ export class Product extends BaseEntity {
    @Column()
    variant!: string
 
-   @ManyToMany(() => RawMaterial)
+   @ManyToMany(() => RawMaterial, rawMaterial => rawMaterial.products)
    @JoinTable()
    rawMaterials!: RawMaterial[]
 
@@ -31,11 +31,6 @@ export class Product extends BaseEntity {
    @OneToMany(() => Raise, raise => raise.item)
    raises!: Raise[]
 
-   getPrice() {
-      let newPrice = 0
-      this.rawMaterials.forEach(material => {
-         newPrice += material.price
-      })
-      return newPrice * (this.profit / 100)
-   }
+   @Column()
+   price!: number
 }

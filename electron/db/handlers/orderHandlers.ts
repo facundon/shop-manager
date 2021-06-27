@@ -1,8 +1,10 @@
-import { InsertOrderProps, UpdateOrderProps } from "../@types/api"
 import { ipcMain } from "electron"
-import { Customer } from "./entity/Customer"
-import { Order } from "./entity/Order"
-import { Product } from "./entity/Product"
+import { Customer } from "../entity/Customer"
+import { Order } from "../entity/Order"
+import { Product } from "../entity/Product"
+
+import { InsertOrderProps, UpdateOrderProps } from "../../@types/api"
+import { getOrderPrice } from "../utils"
 
 export default function setOrderHandlers() {
    ipcMain.handle("insert-order", async (_, props: InsertOrderProps) => {
@@ -15,7 +17,8 @@ export default function setOrderHandlers() {
          order.customer = customer
          const products = await Product.findByIds(productsIds)
          order.products = products
-         order.save()
+         order.price = getOrderPrice(products, discount)
+         await order.save()
          return { id: order.id, price: order.price }
       } catch (error) {
          console.error(error)
@@ -36,7 +39,7 @@ export default function setOrderHandlers() {
             const products = await Product.findByIds(productsIds)
             order.products = products
          }
-         order.save()
+         await order.save()
          return order.price
       } catch (error) {
          console.error(error)
