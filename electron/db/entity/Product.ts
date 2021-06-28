@@ -33,4 +33,6 @@ export class Product extends BaseEntity {
 
    @Column()
    price!: number
+
+   type = "Product"
 }

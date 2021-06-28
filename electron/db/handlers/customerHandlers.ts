@@ -50,4 +50,20 @@ export default function setCustomerHandlers() {
          return error
       }
    })
+   ipcMain.handle("get-all-customers", async () => {
+      try {
+         const customers = await Customer.find({
+            relations: ["orders", "orders.products"],
+            order: { name: "ASC" },
+         })
+         const customersWithTotal = customers.map(customer => {
+            const totalSpent = customer.getTotalSpent()
+            return { ...customer, totalSpent }
+         })
+         return customersWithTotal
+      } catch (error) {
+         console.error(error)
+         return error
+      }
+   })
 }

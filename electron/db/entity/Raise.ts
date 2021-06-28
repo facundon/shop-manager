@@ -21,6 +21,9 @@ export class Raise extends BaseEntity {
    date!: Date
 
    @Column()
+   type!: string
+
+   @Column()
    percent!: number
 
    @Column()

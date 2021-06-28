@@ -11,6 +11,7 @@ import {
    UpdateProductProps,
    UpdateRawMaterialProps,
 } from "../../electron/@types/api"
+import { Customer } from "../../electron/db/entity/Customer"
 
 declare global {
    interface Window {
@@ -19,6 +20,7 @@ declare global {
             insert: (props: InsertCustomerProps) => Promise<number | Error>
             delete: (props: DeleteCustomerProps) => Promise<null | Error>
             update: (props: UpdateCustomerProps) => Promise<null | Error>
+            getAll: () => Promise<Customer[] | Error>
          }
          order: {
             insert: (

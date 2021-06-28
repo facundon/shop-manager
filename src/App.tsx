@@ -36,6 +36,9 @@ function App() {
    const updatePrice = async () => {
       await window.electron.product.update({ id: 1, profit: 200 })
    }
+   const deleteProduct = async () => {
+      await window.electron.product.delete({ id: 1 })
+   }
    return (
       <div className="App">
          <p>
@@ -43,6 +46,15 @@ function App() {
          </p>
          <button onClick={addCustomer}>Add Customer</button>
          <button onClick={updatePrice}>Update price</button>
+         <button
+            onClick={async () => {
+               const res = await window.electron.customer.getAll()
+               console.log(res)
+            }}
+         >
+            Get all customers
+         </button>
+         <button onClick={deleteProduct}>Delete Product</button>
       </div>
    )
 }

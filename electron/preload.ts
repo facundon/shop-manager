@@ -25,6 +25,9 @@ contextBridge.exposeInMainWorld("electron", {
       async update(props: UpdateCustomerProps) {
          return await ipcRenderer.invoke("update-customer", props)
       },
+      async getAll() {
+         return await ipcRenderer.invoke("get-all-customers")
+      }
    },
    order: {
       async insert(props: InsertOrderProps) {

@@ -25,4 +25,6 @@ export class RawMaterial extends BaseEntity {
 
    @ManyToMany(() => Product, product => product.rawMaterials)
    products!: Product[]
+
+   type = "Raw Material"
 }

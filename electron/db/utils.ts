@@ -12,6 +12,7 @@ export async function registerRaise(
       raise.newPrice = newPrice
       raise.percent = (raise.newPrice / raise.oldPrice - 1) * 100
       raise.item = item
+      raise.type = item.type
       await raise.save()
    } catch (err) {
       throw err
