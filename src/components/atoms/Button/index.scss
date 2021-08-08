@@ -1,0 +1,150 @@
+@use "../../../styles/functions" as f;
+
+.btn-wrapper {
+   $button-size-sm: 2.3em;
+   $button-size-md: 3em;
+   max-width: max-content;
+   cursor: pointer;
+   user-select: none;
+   border-radius: 15%;
+   border-bottom-left-radius: initial;
+   background-size: 200%;
+   box-shadow: 0px 4px 8px 0 f.getColor("pink", 200, 0.3);
+   button {
+      font: inherit;
+      color: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: inherit;
+      background-color: transparent;
+      padding: 0.4em;
+      margin: 0;
+      border: none;
+      height: 100%;
+      width: 100%;
+      outline: none;
+      &:focus-visible {
+         outline: none;
+      }
+   }
+   &:hover,
+   &:focus,
+   &:focus-visible {
+      text-decoration: none;
+      outline: none;
+   }
+   &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+      &:active,
+      &:hover,
+      &:focus,
+      &:focus-visible {
+         transform: none;
+      }
+   }
+   * svg {
+      fill: f.getColor("theme", "font");
+      height: 2.5em;
+      width: 2.5em;
+   }
+
+   &.primary {
+      background-image: linear-gradient(
+         255deg,
+         f.getColor("theme", "primary"),
+         f.getColor("theme", "primary", 0.8)
+      );
+   }
+
+   &.secondary {
+      background-image: linear-gradient(
+         205deg,
+         f.getColor("theme", "secondary"),
+         f.getColor("theme", "secondary", 0.8)
+      );
+   }
+
+   &.subtle {
+      background-color: transparent;
+      border: 3px solid;
+      border-image: linear-gradient(
+         to bottom,
+         f.getColor("theme", "primary"),
+         f.getColor("theme", "secondary")
+      );
+      border-image-slice: 1;
+      transition: filter 600ms ease-in-out;
+      &:hover,
+      &:focus {
+         filter: hue-rotate(340deg);
+      }
+   }
+
+   &.circle {
+      border-radius: 50%;
+   }
+
+   &.minimalist {
+      position: relative;
+      box-shadow: none;
+   }
+
+   &.with-text {
+      font-weight: 400;
+      border-radius: 0.3em;
+      button {
+         padding: 0.5em 1em;
+      }
+      * svg {
+         padding-right: 1em;
+      }
+      &.md {
+         font-size: 1.3em;
+         * svg {
+            padding-right: 1em;
+         }
+      }
+   }
+
+   &.link {
+      display: inline-block;
+      border: none;
+      box-shadow: none;
+      background-color: transparent;
+      padding: 0;
+      margin: 0;
+      width: max-content;
+      text-decoration: underline;
+      font-weight: normal;
+      font-size: inherit;
+      &:active {
+         transform: translate(0);
+      }
+   }
+
+   &.nav {
+      background-color: transparent;
+      box-shadow: none;
+      button {
+         padding-left: 0;
+      }
+   }
+
+   span.sm {
+      font-size: 1.5em;
+   }
+   span.md {
+      font-size: 2.6em;
+   }
+   &.sm > button > .loader-wrapper {
+      height: 1.5em;
+      & .loader > div {
+         margin: 0 0.1em;
+      }
+   }
+   &.md > button > .loader-wrapper {
+      height: 2.6em;
+   }
+}

@@ -1,0 +1,25 @@
+@use "../../../styles/functions" as f;
+
+.nav-link {
+   display: flex;
+   padding-left: 1em;
+   &.active {
+      background-color: f.getColor("theme", "background");
+   }
+   &:hover {
+      background-color: f.getColor("theme", "primaryDarker");
+   }
+   &:hover .btn-wrapper * svg {
+      fill: f.getColor("theme", "secondary");
+      filter: grayscale(0%);
+      transition: filter 200ms ease-in-out;
+   }
+   .btn-wrapper {
+      * svg {
+         filter: grayscale(100%);
+      }
+      .btn-name {
+         margin-left: 0.5em;
+      }
+   }
+}

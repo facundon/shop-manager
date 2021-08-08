@@ -1,0 +1,28 @@
+@use "../../../styles/functions" as f;
+
+.side-nav {
+   background-color: f.getColor("theme", "primary");
+   position: fixed;
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   width: 5em;
+   transition: width 200ms ease;
+   &:hover {
+      width: 12em;
+      .btn-name {
+         display: block;
+      }
+   }
+   & .btn-name {
+      display: none;
+   }
+
+   > ul {
+      padding-inline-start: 0;
+      list-style: none;
+      > li {
+         margin: 1em 0;
+      }
+   }
+}

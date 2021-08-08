@@ -9,6 +9,6 @@ body {
       "Helvetica Neue", sans-serif;
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
-   color: f.getColor("white", 400);
-   background-color: f.getColor("black", 800);
+   color: f.getColor("theme", "font");
+   background-color: f.getColor("theme", "primaryDarker");
 }

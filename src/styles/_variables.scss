@@ -1,9 +1,11 @@
 $color: (
-   "background": (
-      200: hsl(262, 48%, 22%),
-      400: hsl(245, 39%, 28%),
-      600: hsl(240, 34%, 21%),
-      800: hsl(246, 57%, 10%),
+   "theme": (
+      background: hsl(223, 8%, 17%),
+      primary: hsl(224, 37%, 17%),
+      primaryDarker: hsl(224, 35%, 11%),
+      secondary: hsl(282, 29%, 51%),
+      secondaryDarker: hsl(281, 38%, 21%),
+      font: hsl(0, 0%, 90%),
    ),
    "violet": (
       200: hsl(262, 100%, 81%),
